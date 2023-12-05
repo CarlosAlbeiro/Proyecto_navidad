@@ -11,7 +11,7 @@ app.get('/', (req, res)=>{
 })
 app.get('/ping', async (req, res)=>{
     const response=await pool.query('SELECT NOW()')
-    return res.json(result.rows[0])
+    return res.json(response.rows[0])
 })
 app.listen(5000)
 console.log("servidor en:"+ 5000);
