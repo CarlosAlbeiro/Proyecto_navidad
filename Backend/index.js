@@ -8,7 +8,7 @@ const pool= new pg.Pool({
     connectionString: process.env.DATABASE_URL
 })
 app.get('/', (req, res)=>{
-    res.send("Hola princesa mira un servidor en linea")
+    res.send("Aun sirve el despliegue")
 })
 app.get('/ping', async (req, res)=>{
     const response=await pool.query('SELECT NOW()')
