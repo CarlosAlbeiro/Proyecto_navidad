@@ -3,14 +3,23 @@ import { config } from "dotenv";
 import mysql from 'mysql2/promise';
 // import pg from 'pg'
 
+config();
+
 const app = express();
 
 // Conexión a MySQL utilizando tus credenciales
+// const connection = mysql.createConnection({
+//     host: 'roundhouse.proxy.rlwy.net',
+//     user: 'root',
+//     password: '25D5HAcAHe5gFBh1eA-ge-Df13A-aEEg',
+//     database: 'railway',
+// });
+
 const connection = mysql.createConnection({
-    host: 'roundhouse.proxy.rlwy.net',
-    user: 'root',
-    password: '25D5HAcAHe5gFBh1eA-ge-Df13A-aEEg',
-    database: 'railway',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 connection.connect()
@@ -29,9 +38,9 @@ app.use((req, res, next) => {
     next();
 });
 
-const pool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL
-})
+// const pool = new pg.Pool({
+//     connectionString: process.env.DATABASE_URL
+// })
 app.get('/', (req, res) => {
     res.send("Aun sirve el despliegue")
 })
