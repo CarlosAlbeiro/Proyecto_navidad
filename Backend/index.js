@@ -49,6 +49,11 @@ app.get('/login', async (req, res) => {
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, password]);
 
+        if (result) {
+            res.json(result);
+        } else {
+            res.status(500).json({ error: 'el usuario no esta registrado' });
+        }
         // Devuelve el resultado de la inserción
         res.json(result);
     } catch (error) {
