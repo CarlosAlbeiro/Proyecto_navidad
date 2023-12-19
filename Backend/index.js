@@ -48,6 +48,7 @@ app.get('/login', async (req, res) => {
 
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, password]);
+
         if (result.length > 0) {
             // Devuelve el resultado de la inserción
             res.json(result);
@@ -59,16 +60,6 @@ app.get('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
-});
-
-
-app.get('/', (req, res) => {
-    res.send("Aun sirve el despliegue")
-})
-
-app.get('/ping', async (req, res) => {
-    const [rows, fields] = await pool.query('SELECT NOW()');
-    return res.json(rows[0]);
 });
 
 app.get('/crear_deseos', async (req, res) => {
@@ -84,25 +75,46 @@ app.get('/crear_deseos', async (req, res) => {
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('INSERT INTO Deseos (nombre, link, id_user) VALUES (?, ?, ?)', [id_usuario, nombre, link]);
 
+        if(result.length>0){
+            res.json(result);
+        }else{
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
         // Devuelve el resultado de la inserción
-        res.json(result);
     } catch (error) {
-        console.error('Error al crear deseos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-
 app.get('/eliminar_deseos', async (req, res) => {
-    return res.json("Ruta para eliminar deseos");
+    try {
+        // Obtén los parámetros de la URL
+        const { id } = req.query;
+
+        // Verifica que todos los parámetros necesarios estén presentes
+        if (!id ) {
+            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        }
+
+        // Realiza la inserción en la base de datos
+        const [result] = await pool.query('DELETE FROM Deseos WHERE id=?', [id]);
+
+        if(result.length>0){
+            res.json(result);
+        }else{
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+        // Devuelve el resultado de la inserción
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 });
 
 app.get('/registra_usuarios', async (req, res) => {
     return res.json("Ruta registrar usuarios");
 });
 
-
-const PORT = 5000;
-app.listen(PORT, () => {
-    console.log(`Servidor en: http://localhost:${PORT}`);
+const puerto = process.env.PORT || 3000;;
+app.listen(puerto, () => {
+    console.log(`Servidor en: ${puerto}`);
 });
