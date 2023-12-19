@@ -22,13 +22,12 @@ const connection = mysql.createConnection({
     database: process.env.DB_DATABASE
 });
 
-connection.connect()
-    .then(() => {
-        console.log('Conexión a MySQL establecida');
-    })
-    .catch((error) => {
-        console.error('Error de conexión a MySQL:', error);
-    });
+try {
+    await connection.connect();
+    console.log('Conexión a MySQL establecida');
+} catch (error) {
+    console.error('Error de conexión a MySQL:', error);
+}
 
 // Configuración para permitir cualquier origen (CORS)
 app.use((req, res, next) => {
