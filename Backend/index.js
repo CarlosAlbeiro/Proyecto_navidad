@@ -1,8 +1,25 @@
 import express from "express";
 import { config } from "dotenv";
-import pg from 'pg'
+const mysql = require('mysql2/promise');
+// import pg from 'pg'
 
 const app = express();
+
+// Conexión a MySQL utilizando tus credenciales
+const connection = mysql.createConnection({
+    host: 'roundhouse.proxy.rlwy.net',
+    user: 'root',
+    password: '25D5HAcAHe5gFBh1eA-ge-Df13A-aEEg',
+    database: 'railway',
+});
+
+connection.connect()
+    .then(() => {
+        console.log('Conexión a MySQL establecida');
+    })
+    .catch((error) => {
+        console.error('Error de conexión a MySQL:', error);
+    });
 
 // Configuración para permitir cualquier origen (CORS)
 app.use((req, res, next) => {
