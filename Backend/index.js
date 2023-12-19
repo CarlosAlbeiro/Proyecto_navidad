@@ -1,10 +1,11 @@
 import express from "express";
 import { config } from "dotenv";
-const mysql = require('mysql2/promise');
+import { config } from "";
+import mysql from 'mysql2/promise';
 // import pg from 'pg'
 
 const app = express();
-
+const mysql=mysql();
 // Conexión a MySQL utilizando tus credenciales
 const connection = mysql.createConnection({
     host: 'roundhouse.proxy.rlwy.net',
