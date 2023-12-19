@@ -12,7 +12,7 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    port:process.env.DB_PORT,
+    port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -46,8 +46,26 @@ app.get('/ping', async (req, res) => {
 });
 
 app.get('/crear_deseos', async (req, res) => {
-    return res.json("Ruta para crear deseos");
+    try {
+        // Obtén los parámetros de la URL
+        const { id_usuario, nombre, link } = req.query;
+
+        // Verifica que todos los parámetros necesarios estén presentes
+        if (!id_usuario || !nombre || !link) {
+            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        }
+
+        // Realiza la inserción en la base de datos
+        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, id_user) VALUES (?, ?, ?)', [id_usuario, nombre, link]);
+
+        // Devuelve el resultado de la inserción
+        res.json(result);
+    } catch (error) {
+        console.error('Error al crear deseos:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 });
+
 
 app.get('/eliminar_deseos', async (req, res) => {
     return res.json("Ruta para eliminar deseos");
