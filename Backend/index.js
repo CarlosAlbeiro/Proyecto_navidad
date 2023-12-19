@@ -65,7 +65,7 @@ app.get('/login', async (req, res) => {
 app.get('/crear_deseos', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
-        const { id_usuario, nombre, link } = req.query;
+        const { id_usuario, nombre, link, descripcion } = req.query;
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!id_usuario || !nombre ) {
@@ -73,7 +73,7 @@ app.get('/crear_deseos', async (req, res) => {
         }
 
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, id_user) VALUES (?, ?, ?)', [id_usuario, nombre, link]);
+        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link,descripcion,id_usuario]);
 
         if(result.length>0){
             res.json(result);
