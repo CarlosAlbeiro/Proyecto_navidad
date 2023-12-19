@@ -1,6 +1,5 @@
 import express from "express";
 import { config } from "dotenv";
-import { config } from "";
 import mysql from 'mysql2/promise';
 // import pg from 'pg'
 
