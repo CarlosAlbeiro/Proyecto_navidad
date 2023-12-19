@@ -36,6 +36,28 @@ app.get('/users', async (req, res) => {
     }
 });
 
+app.get('/login', async (req, res) => {
+    try {
+        // Obtén los parámetros de la URL
+        const { usuario, password } = req.query;
+
+        // Verifica que todos los parámetros necesarios estén presentes
+        if (!usuario || !password || !link) {
+            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        }
+
+        // Realiza la inserción en la base de datos
+        const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, password]);
+
+        // Devuelve el resultado de la inserción
+        res.json(result);
+    } catch (error) {
+        console.error('Error al crear deseos:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
+
 app.get('/', (req, res) => {
     res.send("Aun sirve el despliegue")
 })
@@ -75,9 +97,6 @@ app.get('/registra_usuarios', async (req, res) => {
     return res.json("Ruta registrar usuarios");
 });
 
-app.get('/iniciar_sesion', async (req, res) => {
-    return res.json("login");
-});
 
 const PORT = 5000;
 app.listen(PORT, () => {
