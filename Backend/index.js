@@ -68,7 +68,7 @@ app.get('/crear_deseos', async (req, res) => {
         const { id_usuario, nombre, link } = req.query;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!id_usuario || !nombre || !link) {
+        if (!id_usuario || !nombre ) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
