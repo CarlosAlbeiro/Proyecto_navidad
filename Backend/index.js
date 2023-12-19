@@ -1,7 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
 import pg from 'pg'
-const cors = require('cors');
 
 const app = express();
 
