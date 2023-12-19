@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deseos</title>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link rel="shortcut icon" href="css/img/santa.png" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Enlaces a tus estilos CSS, scripts, etc. -->
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <!-- Contenido de tu página -->
+
+    <header class="d-flex justify-content-center fixed-top mt-1">
+      <nav>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a type="button" onclick="abrirCerrarModal()" >
+              <img src="css/img/papa.png" alt="" width="50">
+            </a>
+          </li>
+          <!-- <li class="list-inline-item">
+            <a href="#lenguajes"><i class="fas fa-laptop-code"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#frameworks"><i class="fas fa-crop-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#complementos"><i class="fas fa-puzzle-piece"></i></a>
+          </li>
+          <li class="list-inline-item"><a href="#links"><i class="fas fa-link"></i></a></li>
+          <li class="list-inline-item"><a id="modo_oscuro" href="#"><i class="fas fa-cloud-moon"></i></a></li> -->
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="d-flex justify-content-center align-items-center">
+        <div class="col-12 card">
+          <div class="card-header d-flex justify-content-center align-items-center" style="background-image: url(https://happysleepweb.com/img/luces.gif);
+          background-repeat: repeat-x;">
+            <h4>Lista de deseos</h4>
+          </div>
+          <div class="card-body d-flex flex-column justify-content-center align-items-center" id="list_deseos">
+          </div>
+        </div>
+      </section>
+      <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+        <div class="col-10 ">
+          <input class="form-control m-2" type="text" id="user_name" placeholder="Ingrese su usuario">
+          <input class="form-control m-2" type="password" id="user_password" placeholder="Ingrese su clave">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  onclick="ingresar()">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+     
+      <!-- Modal -->
+      <!-- <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="loginLabel">Login</h1>
+              <a  data-bs-dismiss="modal"> <i class="fas fa-times-circle" style="color: #ff0000; font-size: 20px;"></i></a>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+              <div class="col-10 ">
+                <input class="form-control m-2" type="text" id="user_name" placeholder="Ingrese su usuario">
+                <input class="form-control m-2" type="password" id="user_password" placeholder="Ingrese su clave">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"  onclick="ingresar()">Ingresar</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <section
+        class="d-flex justify-content-center align-items-center"
+        id="lenguajes"
+      >
+     
+      
+        </div>
+      </section>
+
+      <section
+        class="d-flex justify-content-center align-items-center"
+        id="frameworks"
+      >
+     
+      
+        </div>
+      </section>
+
+      <section
+        class="d-flex justify-content-center align-items-center"
+        id="complementos"
+      >
+     
+      
+        </div>
+      </section>
+
+      <section
+        class="d-flex justify-content-center align-items-center"
+        id="links"
+      >
+     
+      
+        </div>
+      </section> -->
+    </main>
+    <footer>
+      <p>Derechos de autor © 2023. Todos los derechos reservados.</p>
+    </footer>
+    <script src="js/script.js"></script>
+  </body>
+</html>
