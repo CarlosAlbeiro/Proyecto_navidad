@@ -4,7 +4,7 @@ import mysql from 'mysql2/promise';
 // import pg from 'pg'
 
 const app = express();
-const mysql=mysql();
+
 // Conexión a MySQL utilizando tus credenciales
 const connection = mysql.createConnection({
     host: 'roundhouse.proxy.rlwy.net',
