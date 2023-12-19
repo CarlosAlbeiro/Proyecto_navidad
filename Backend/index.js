@@ -16,17 +16,17 @@ app.get('/ping', async (req, res)=>{
 })
 
 app.get('/crear_deseos', async (req, res)=>{
-    res.send("Ruta para crear deseos")
+    return res.json("Ruta para crear deseos");
 })
 
 app.get('/eliminar_deseos', async (req, res)=>{
-    res.send("Ruta para crear deseos")
+    return res.json("Ruta para eliminar deseos");
 })
 app.get('/registra_usuarios', async (req, res)=>{
-    res.send("Registrar usuarios")
+    return res.json("Ruta registrar usuarios");
 })
 app.get('/iniciar_sesion', async (req, res)=>{
-    res.send("Login")
+    return res.json("login");
 })
 
 app.listen(5000)
