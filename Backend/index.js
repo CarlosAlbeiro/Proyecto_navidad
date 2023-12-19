@@ -42,7 +42,7 @@ app.get('/login', async (req, res) => {
         const { usuario, password } = req.query;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!usuario || !password || !link) {
+        if (!usuario || !password) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
@@ -52,7 +52,6 @@ app.get('/login', async (req, res) => {
         // Devuelve el resultado de la inserción
         res.json(result);
     } catch (error) {
-        console.error('Error al crear deseos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
