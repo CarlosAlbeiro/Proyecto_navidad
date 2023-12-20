@@ -40,17 +40,16 @@ app.get('/users', async (req, res) => {
 });
 
 app.post('/registrar_usuarios', async (req, res) => {
-    try {
-        // Obtén los parámetros de la URL
-        const { usuario, password } = req.query;
+    // Obtén los parámetros de la URL
+    const { usuario, password } = req.query;
 
-        // Generar un salt
-        const saltRounds = 10;
-        const salt = await bcrypt.genSalt(saltRounds);
+    // Generar un salt
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    try {
 
         // Hashear la contraseña con el salt
         const  hashedPassword = bcrypt.hash(password, salt);
-
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !password) {
