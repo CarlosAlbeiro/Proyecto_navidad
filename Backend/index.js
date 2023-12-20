@@ -39,9 +39,9 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.post('/registrar_usuarios', async (req, res) => {
+app.get('/registrar_usuarios', async (req, res) => {
     // Obtén los parámetros de la URL
-    const { usuario, password } = req.body;
+    const { usuario, password } = req.query;
 
     try {
         console.log(password);
@@ -68,7 +68,7 @@ app.post('/registrar_usuarios', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
+app.get('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
         const { usuario, password } = req.query;
@@ -111,7 +111,7 @@ app.get('/deseos', async (req, res) => {
     }
 });
 
-app.post('/crear_deseos', async (req, res) => {
+app.get('/crear_deseos', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
         const { id_usuario, nombre, link, descripcion } = req.query;
