@@ -19,6 +19,8 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
+const puerto = process.env.PORT || 3000;
+
 // Configuración para permitir cualquier origen (CORS)
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // Permite cualquier origen
@@ -37,7 +39,7 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.get('/registrar_usuarios', async (req, res) => {
+app.post('/registrar_usuarios', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
         const { usuario, password } = req.query;
@@ -62,7 +64,7 @@ app.get('/registrar_usuarios', async (req, res) => {
     }
 });
 
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
         const { usuario, password } = req.query;
@@ -106,7 +108,7 @@ app.get('/deseos', async (req, res) => {
     }
 });
 
-app.get('/crear_deseos', async (req, res) => {
+app.post('/crear_deseos', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
         const { id_usuario, nombre, link, descripcion } = req.query;
@@ -154,11 +156,7 @@ app.get('/eliminar_deseos', async (req, res) => {
     }
 });
 
-app.get('/registra_usuarios', async (req, res) => {
-    return res.json("Ruta registrar usuarios");
-});
 
-const puerto = process.env.PORT || 3000;;
 app.listen(puerto, () => {
     console.log(`Servidor en: ${puerto}`);
 });
