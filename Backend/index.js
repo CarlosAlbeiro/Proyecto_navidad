@@ -6,6 +6,11 @@ import bcrypt from 'bcrypt';
 config();
 
 const app = express();
+// Middleware para permitir cualquier origen (CORS)
+app.use(cors());
+
+// Middleware para analizar el cuerpo de la solicitud como JSON
+app.use(express.json());
 
 // Crear un pool de conexiones para MySQL
 const pool = mysql.createPool({
