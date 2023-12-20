@@ -74,11 +74,10 @@ app.post('/registrar_usuarios', async (req, res) => {
     }
 });
 
-
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
-        const { usuario, password } = req.query;
+        const { usuario, password } = req.body;
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !password) {
