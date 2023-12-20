@@ -41,7 +41,7 @@ app.get('/users', async (req, res) => {
 
 app.post('/registrar_usuarios', async (req, res) => {
     // Obtén los parámetros de la URL
-    const { usuario, password } = req.query;
+    const { usuario, password } = req.body;
 
     try {
         console.log(password);
