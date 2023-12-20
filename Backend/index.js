@@ -66,7 +66,7 @@ app.get('/deseos', async (req, res) => {
     try {
        
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('SELECT *.d, name.u FROM Deseos AS d INNER JOIN User AS u ON d.id_user =u.id ');
+        const [result] = await pool.query('SELECT *.d, name.u FROM Deseos AS d INNER JOIN Users AS u ON d.id_user =u.id ');
 
         if(result){
             res.json(result);
