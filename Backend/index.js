@@ -44,8 +44,13 @@ app.post('/registrar_usuarios', async (req, res) => {
         // Obtén los parámetros de la URL
         const { usuario, password } = req.query;
 
-        // Genera un hash (encriptación) de la contraseña
-        const hashedPassword = bcrypt.hash(password, 10);
+        // Generar un salt
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+
+        // Hashear la contraseña con el salt
+        const hashedPassword = await bcrypt.hash(password, salt);
+
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !password) {
@@ -57,7 +62,6 @@ app.post('/registrar_usuarios', async (req, res) => {
         } else {
             res.status(500).json({ error: 'Error en la insercion' });
         }
-        res.json(rows);
     } catch (error) {
         console.error('Error al obtener usuarios:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -155,7 +159,6 @@ app.get('/eliminar_deseos', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-
 
 app.listen(puerto, () => {
     console.log(`Servidor en: ${puerto}`);
