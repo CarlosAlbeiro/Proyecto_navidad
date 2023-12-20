@@ -44,8 +44,11 @@ app.post('/registrar_usuarios', async (req, res) => {
     const { usuario, password } = req.query;
 
     try {
+        console.log(password);
+        console.log("-->"+usuario);
            // Verifica que todos los parámetros necesarios estén presentes
            if (!usuario || !password) {
+            console.error('Error al registrar usuarios:');
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
@@ -64,6 +67,7 @@ app.post('/registrar_usuarios', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
 app.post('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
@@ -93,7 +97,6 @@ app.post('/login', async (req, res) => {
 
 app.get('/deseos', async (req, res) => {
     try {
-
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT *.Deseos, name.Users FROM Deseos  INNER JOIN Users ON Deseos.id_user=Users.id ');
 
