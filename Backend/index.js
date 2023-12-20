@@ -73,9 +73,9 @@ app.get('/crear_deseos', async (req, res) => {
         }
 
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link,descripcion,id_usuario]);
+        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link, descripcion,id_usuario]);
 
-        if(result.length>0){
+        if(result){
             res.json(result);
         }else{
             res.status(500).json({ error: 'Error interno del servidor' });
