@@ -49,7 +49,7 @@ app.post('/registrar_usuarios', async (req, res) => {
         const salt = await bcrypt.genSalt(saltRounds);
 
         // Hashear la contraseña con el salt
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const  hashedPassword = bcrypt.hash(password, salt);
 
 
         // Verifica que todos los parámetros necesarios estén presentes
