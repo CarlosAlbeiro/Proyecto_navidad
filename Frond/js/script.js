@@ -33,28 +33,29 @@ function consulta_deseos() {
 }
 
 function desear(){
-  let usuario=document.getElementById('usuario').value;
-  let producto=document.getElementById('producto').value;
-  let descripcion=document.getElementById('descripcion').value;
-  let link=document.getElementById('link').value;
-  let imagen=document.getElementById('imagen').value;
-
+  let usuario_form=document.getElementById('usuario').value;
+  let producto_form=document.getElementById('producto').value;
+  let descripcion_form=document.getElementById('descripcion').value;
+  let link_form=document.getElementById('link').value;
+  let imagen_form=document.getElementById('imagen').value;
+ 
   $.ajax({
     type: "POST",
     url: "https://proyecto-navidad.onrender.com/crear_regalo",
     data: {
-      usuario: usuario,
-      producto: producto,
-      descripcion: descripcion,
-      link:link,
-      imagen:imagen
+      usuario: usuario_form,
+      producto: producto_form,
+      descripcion: descripcion_form,
+      link:link_form,
+      imagen:imagen_form
     },
     success: function (response) {
       console.log("Deseo ->". response);
       
     },
     error: function (error) {
-      console.error("Error en la solicitud AJAX:", error);
+      let errorCode=JSON.parse(error);
+      console.error(errorCode);
     }
   });
   

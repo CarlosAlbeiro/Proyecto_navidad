@@ -26,31 +26,53 @@
     
     <!-- Contenido de tu página -->
     <header class="d-flex justify-content-center fixed-top mt-1 animate__animated animate__fadeIn animate__delay-1s">
-     
+      
     </header>
 
     <main class="animate__animated animate__fadeIn animate__delay-1s">
-      <section class="d-flex justify-content-center align-items-center">
-        <div class="col-12 card">
-          <div class="card-header d-flex justify-content-center align-items-center">
-            <h4>Lista de deseos</h4>
+      <section>
+        <div class="row">
+          <div class="col-4 card">
+            <div class="card-header d-flex justify-content-center align-items-center">
+              <h4>Agregar Regalo</h4>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              <label for="Nombre">
+                <small><b>Tu nombre</b></small>
+                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="Nombre">
+              </label>
+              <label for="producto" class="mt-1">
+                <small><b>Articulo</b></small>
+                <input class="form-control" type="text" id="producto" name="producto" placeholder="producto">
+              </label>
+              <label for="descripcion" class="mt-1">
+                <small><b>Descripcion</b></small>
+                <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="descripcion">
+              </label>
+              <label for="link" class="mt-1">
+                <small><b>Link compra especifico</b></small>
+                <input class="form-control" type="text" id="link" name="link" placeholder="link">
+              </label>
+              <label for="imagen" class="mt-1">
+                <small><b>link imagen</b></small>
+                <input class="form-control" type="text" id="imagen" name="imagen" placeholder="Link imagen">
+              </label>
+              <label for="boton" class="mt-2">
+                <button onclick="desear()" type="button" class="btn btn-success">Agregar</button>
+              </label>
+  
+            </div>
           </div>
-          <div class="card-body d-flex flex-column justify-content-center align-items-center">
-            
-          </div>
-        </div>
-        <div class="col-12 card">
-          <div class="card-header d-flex justify-content-center align-items-center">
-            <h4>Lista de deseos</h4>
-          </div>
-          <div class="card-body d-flex flex-column justify-content-center align-items-center" id="list_deseos">
+          <div class="col-8 card ml-3">
+            <div class="card-header d-flex justify-content-center align-items-center">
+              <h4>Lista de deseos</h4>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center align-items-center" id="list_deseos">
+            </div>
           </div>
         </div>
       </section>
     </main>
-    <footer class="d-flex fixed-bottom">
-      <p>Derechos de autor © 2023. Todos los derechos reservados.</p>
-    </footer>
     <script src="js/script.js"></script>
   </body>
 </html>

@@ -120,7 +120,7 @@ app.post('/crear_regalo', async (req, res) => {
         const {usuario,producto,descripcion,link,imagen} = req.body;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!usuario || !producto || !imagen) {
+        if (!usuario || !producto) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
