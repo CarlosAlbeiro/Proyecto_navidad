@@ -45,7 +45,7 @@ app.post('/registrar_usuarios', async (req, res) => {
 
     try {
         // Hashear la contraseña con el salt
-        const  hashedPassword = bcrypt.hash(password, 10);
+        const  hashedPassword = await bcrypt.hash(password, 10);
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !password) {
