@@ -78,41 +78,5 @@ body, h1, h2, p, ul {
   }
   
 
-  .ocean { 
-    height: 200px;
-    width:100%;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-  
-  .ocean.v01 .wave {
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
-  }
-  
-  .ocean.v01 {
-    transform: rotate(180deg);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .wave {
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
-    position: absolute;
-    bottom: -25px;
-    width: 6400px;
-    height: 100%;
-    animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
-    transform: translate3d(0, 0, 0);
-  }
-  
-  .wave:nth-of-type(2) {
-    bottom: -25px;
-    animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
-    opacity: 1;
-  }
-  
-  
+ 
   

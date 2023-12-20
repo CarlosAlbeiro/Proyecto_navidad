@@ -1,7 +1,7 @@
-function Usuarios() {
+function Deseos() {
   $.ajax({
     type: "GET",
-    url: "https://proyecto-navidad.onrender.com/users",
+    url: "https://proyecto-navidad.onrender.com/deseos",
     success: function (data) {
       let contenedor = document.getElementById('list_deseos')
       data.forEach(deseos => {
@@ -27,30 +27,6 @@ function Usuarios() {
       nuevoDiv.textContent = "Error :C";
       nuevoDiv.className = "col-4 badge bg-danger m-2";
       contenedor.appendChild(nuevoDiv);
-    }
-  });
-}
-
-function traerrespuesta() {
-  // Parámetros que deseas enviar
-  var id_usuario = "1";
-  var nombre = "prueba";
-  var link = "prueba";
-
-  $.ajax({
-    type: "GET",
-    url: "https://proyecto-navidad.onrender.com/crear_deseos",
-    data: {
-      id_usuario: id_usuario,
-      nombre: nombre,
-      link: link
-    },
-    success: function (data) {
-      alert(data);
-      console.log(data);
-    },
-    error: function (error) {
-      console.error("Error en la solicitud AJAX:", error);
     }
   });
 }
@@ -108,6 +84,7 @@ function ingresar() {
       let imagen=document.createElement("img")
       imagen.src="css/img/sorpresa.png";
       imagen.width="50";
+      imagen.title="Agregar Deseo"
 
       link.appendChild(imagen);
 
@@ -133,4 +110,4 @@ function abrirCerrarModal(id) {
   $(`#${id}`).modal("toggle");
 }
 
-Usuarios();
+Deseos();
