@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
+import cors from 'cors';
 
 config();
 
