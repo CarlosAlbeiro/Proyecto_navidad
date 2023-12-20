@@ -1,6 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import mysql from 'mysql2/promise';
+import bcrypt from 'bcrypt';
 
 config();
 
@@ -36,6 +37,31 @@ app.get('/users', async (req, res) => {
     }
 });
 
+app.get('/registrar_usuarios', async (req, res) => {
+    try {
+        // Obtén los parámetros de la URL
+        const { usuario, password } = req.query;
+
+        // Genera un hash (encriptación) de la contraseña
+        const hashedPassword = bcrypt.hash(password, 10);
+
+        // Verifica que todos los parámetros necesarios estén presentes
+        if (!usuario || !password) {
+            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        }
+        const [response] = await pool.query('INSERT INTO Users(id, name, passwor) VALUES (NULL,?,?)', [usuario, hashedPassword]);
+        if (response) {
+            res.status(200).json({ succes: 'Registro exitoso' });
+        } else {
+            res.status(500).json({ error: 'Error en la insercion' });
+        }
+        res.json(rows);
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
 app.get('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
@@ -45,9 +71,10 @@ app.get('/login', async (req, res) => {
         if (!usuario || !password) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
-
+        // Genera un hash (encriptación) de la contraseña
+        const hashedPassword = bcrypt.hash(password, 10);
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, password]);
+        const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, hashedPassword]);
 
         if (result.length > 0) {
             // Devuelve el resultado de la inserción
@@ -64,13 +91,13 @@ app.get('/login', async (req, res) => {
 
 app.get('/deseos', async (req, res) => {
     try {
-       
+
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT *.Deseos, name.Users FROM Deseos  INNER JOIN Users ON Deseos.id_user =Users.id ');
 
-        if(result.length>0){
+        if (result.length > 0) {
             res.json(result);
-        }else{
+        } else {
             res.status(500).json({ error: 'Error en la validacion' });
         }
         // Devuelve el resultado de la inserción
@@ -85,16 +112,16 @@ app.get('/crear_deseos', async (req, res) => {
         const { id_usuario, nombre, link, descripcion } = req.query;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!id_usuario || !nombre ) {
+        if (!id_usuario || !nombre) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link, descripcion,id_usuario]);
+        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link, descripcion, id_usuario]);
 
-        if(result){
+        if (result) {
             res.json(result);
-        }else{
+        } else {
             res.status(500).json({ error: 'Error interno del servidor' });
         }
         // Devuelve el resultado de la inserción
@@ -109,16 +136,16 @@ app.get('/eliminar_deseos', async (req, res) => {
         const { id } = req.query;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!id ) {
+        if (!id) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('DELETE FROM Deseos WHERE id=?', [id]);
 
-        if(result.length>0){
+        if (result.length > 0) {
             res.json(result);
-        }else{
+        } else {
             res.status(500).json({ error: 'Error interno del servidor' });
         }
         // Devuelve el resultado de la inserción
