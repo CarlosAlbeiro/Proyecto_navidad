@@ -2,13 +2,13 @@ import express from "express";
 import { config } from "dotenv";
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
-import cors from 'cors';
+// import cors from 'cors';
 
 config();
 
 const app = express();
 // Middleware para permitir cualquier origen (CORS)
-app.use(cors());
+// app.use(cors());
 
 // Middleware para analizar el cuerpo de la solicitud como JSON
 app.use(express.json());
