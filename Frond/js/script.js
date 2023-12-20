@@ -1,7 +1,7 @@
 function consulta_deseos() {
   $.ajax({
     type: "GET",
-    url: "https://proyecto-navidad.onrender.com/deseos",
+    url: "https://proyecto-navidad.onrender.com/lista_regalos",
     success: function (data) {
       let contenedor = document.getElementById('list_deseos')
       console.log(data);
@@ -33,82 +33,31 @@ function consulta_deseos() {
 }
 
 function desear(){
-  let deseo=document.getElementById('name_deseo').value;
-  let link=document.getElementById('link_deseo').value;
+  let usuario=document.getElementById('usuario').value;
+  let producto=document.getElementById('producto').value;
   let descripcion=document.getElementById('descripcion').value;
-  let user=document.getElementById('id_user').value;
+  let link=document.getElementById('link').value;
+  let imagen=document.getElementById('imagen').value;
 
   $.ajax({
-    type: "GET",
-    url: "https://proyecto-navidad.onrender.com/crear_deseos",
+    type: "POST",
+    url: "https://proyecto-navidad.onrender.com/crear_regalo",
     data: {
-      id_usuario: user,
-      nombre: deseo,
+      usuario: usuario,
+      producto: producto,
+      descripcion: descripcion,
       link:link,
-      descripcion:descripcion
+      imagen:imagen
     },
     success: function (response) {
       console.log("Deseo ->". response);
-      abrirCerrarModal("deseo")
-      Usuarios();
+      
     },
     error: function (error) {
       console.error("Error en la solicitud AJAX:", error);
     }
   });
   
-}
-
-function ingresar() {
-  let usuario_form=document.getElementById('user_name').value;
-  let password_form=document.getElementById('user_password').value;
-
-  $.ajax({
-    type: "GET",
-    url: "https://proyecto-navidad.onrender.com/login",
-    data: {
-      usuario: usuario_form,
-      password: password_form
-    },
-    success: function (response) {
-      let menu=document.getElementById("menu");
-
-      let agregar=document.createElement("li");
-      agregar.className="list-inline-item";
-
-      let link=document.createElement("a");
-      link.type="button";
-      link.onclick = function() {
-        abrirCerrarModal('deseo');
-      };
-
-      let imagen=document.createElement("img")
-      imagen.src="css/img/sorpresa.png";
-      imagen.width="50";
-      imagen.title="Agregar Deseo"
-
-      link.appendChild(imagen);
-
-      agregar.appendChild(link);
-
-      menu.innerHTML="";
-      menu.appendChild(agregar);
-
-      document.getElementById("id_user").value=response[0].id;
-
-
-      abrirCerrarModal('login')
-      console.log(response[0].id);
-    },
-    error: function (error) {
-      console.error("Error en la solicitud AJAX:", error);
-    }
-  });
-}
-
-function abrirCerrarModal(id) {
-  console.log(id);
-  $(`#${id}`).modal("toggle");
 }
 
 consulta_deseos();

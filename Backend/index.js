@@ -107,9 +107,8 @@ app.get('/lista_regalos', async (req, res) => {
         if (result.length > 0) {
             res.json(result);
         } else {
-            res.status(500).json({ error: 'Error en la validacion' });
+            res.status(500).json({ error: 'Sin regalos' });
         }
-        // Devuelve el resultado de la inserción
     } catch (error) {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
