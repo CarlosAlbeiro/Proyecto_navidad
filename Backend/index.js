@@ -64,14 +64,7 @@ app.get('/login', async (req, res) => {
 
 app.get('/deseos', async (req, res) => {
     try {
-        // Obtén los parámetros de la URL
-        const { id_usuario, nombre, link, descripcion } = req.query;
-
-        // Verifica que todos los parámetros necesarios estén presentes
-        if (!id_usuario || !nombre ) {
-            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
-        }
-
+       
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT *.d, name.u FROM Deseos AS d INNER JOIN User AS u ON d.id_user =u.id ');
 
