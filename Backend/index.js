@@ -51,7 +51,7 @@ app.post('/registrar_usuarios', async (req, res) => {
         if (!usuario || !password) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
-        const [response] = await pool.query('INSERT INTO Users(id, name, passwor) VALUES (NULL,?,?)', [usuario, hashedPassword]);
+        const [response] = await pool.query('INSERT INTO Users(id, name, password) VALUES (NULL,?,?)', [usuario, hashedPassword]);
         if (response) {
             res.status(200).json({ succes: 'Registro exitoso' });
         } else {
