@@ -45,24 +45,24 @@ app.post('/registrar_usuarios', async (req, res) => {
 
     try {
         // Hashear la contraseña con el salt
-        const  hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !password) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
-        const [response] = await pool.query('INSERT INTO Users(id, name, password) VALUES (NULL,?,?)', [usuario, hashedPassword]);
+        const [response] = await pool.query('INSERT INTO Users(name, password) VALUES (?, ?)', [usuario, hashedPassword]);
+        
         if (response) {
-            res.status(200).json({ succes: 'Registro exitoso' });
+            res.status(200).json({ success: 'Registro exitoso' });
         } else {
-            res.status(500).json({ error: 'Error en la insercion' });
+            res.status(500).json({ error: 'Error en la inserción' });
         }
     } catch (error) {
-        console.error('Error al obtener usuarios:', error);
+        console.error('Error al registrar usuarios:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-
 app.post('/login', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
