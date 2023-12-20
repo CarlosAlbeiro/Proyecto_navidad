@@ -1,24 +1,25 @@
-function Deseos() {
+function consulta_deseos() {
   $.ajax({
     type: "GET",
     url: "https://proyecto-navidad.onrender.com/deseos",
     success: function (data) {
       let contenedor = document.getElementById('list_deseos')
-      data.forEach(deseos => {
-        console.log(deseos.name);
-        var nuevoDiv = document.createElement("div");
+      console.log(data);
+      // data.forEach(deseos => {
+      //   console.log(deseos.name);
+      //   var nuevoDiv = document.createElement("div");
 
-        // Configurar propiedades del nuevo div (opcional)
-        nuevoDiv.textContent = deseos.name;
-        if (deseos.id == 1) {
-          nuevoDiv.className = "col-4 badge bg-primary m-2";
-        } else {
-          nuevoDiv.className = "col-4 badge bg-danger m-2";
-        }
+      //   // Configurar propiedades del nuevo div (opcional)
+      //   nuevoDiv.textContent = deseos.name;
+      //   if (deseos.id == 1) {
+      //     nuevoDiv.className = "col-4 badge bg-primary m-2";
+      //   } else {
+      //     nuevoDiv.className = "col-4 badge bg-danger m-2";
+      //   }
 
-        // Agregar el nuevo div al contenedor
-        contenedor.appendChild(nuevoDiv);
-      });
+      //   // Agregar el nuevo div al contenedor
+      //   contenedor.appendChild(nuevoDiv);
+      // });
       // Crear un nuevo elemento div
     },
     error: function (error) {
@@ -110,4 +111,4 @@ function abrirCerrarModal(id) {
   $(`#${id}`).modal("toggle");
 }
 
-Deseos();
+consulta_deseos();
