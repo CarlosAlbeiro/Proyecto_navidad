@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import mysql from 'mysql2/promise';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 // import cors from 'cors';
 
 config();
@@ -35,76 +35,74 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/users', async (req, res) => {
-    try {
-        const [rows, fields] = await pool.query('SELECT * FROM Users');
-        res.json(rows);
-    } catch (error) {
-        console.error('Error al obtener usuarios:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
+// app.get('/users', async (req, res) => {
+//     try {
+//         const [rows, fields] = await pool.query('SELECT * FROM Users');
+//         res.json(rows);
+//     } catch (error) {
+//         console.error('Error al obtener usuarios:', error);
+//         res.status(500).json({ error: 'Error interno del servidor' });
+//     }
+// });
 
-app.post('/registrar_usuarios', async (req, res) => {
-    // Obtén los parámetros del cuerpo de la solicitud
-    const { usuario, password } = req.body;
+// app.post('/registrar_usuarios', async (req, res) => {
+//     // Obtén los parámetros del cuerpo de la solicitud
+//     const { usuario, password } = req.body;
 
-    try {
-        console.log(password);
-        console.log("-->"+usuario);
-           // Verifica que todos los parámetros necesarios estén presentes
-           if (!usuario || !password) {
-            console.error('Error al registrar usuarios');
-            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
-        }
+//     try {
+//            // Verifica que todos los parámetros necesarios estén presentes
+//            if (!usuario || !password) {
+//             console.error('Error al registrar usuarios');
+//             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+//         }
 
-        // Hashear la contraseña con el salt
-        const hashedPassword = await bcrypt.hash(String(password), 10);
+//         // Hashear la contraseña con el salt
+//         const hashedPassword = await bcrypt.hash(String(password), 10);
 
-        const [response] = await pool.query('INSERT INTO Users(name, password) VALUES (?, ?)', [usuario, hashedPassword]);
+//         const [response] = await pool.query('INSERT INTO Users(name, password) VALUES (?, ?)', [usuario, hashedPassword]);
 
-        if (response) {
-            res.status(200).json({ success: 'Registro exitoso' });
-        } else {
-            res.status(500).json({ error: 'Error en la inserción' });
-        }
-    } catch (error) {
-        console.error('Error al registrar usuarios:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
+//         if (response) {
+//             res.status(200).json({ success: 'Registro exitoso' });
+//         } else {
+//             res.status(500).json({ error: 'Error en la inserción' });
+//         }
+//     } catch (error) {
+//         console.error('Error al registrar usuarios:', error);
+//         res.status(500).json({ error: 'Error interno del servidor' });
+//     }
+// });
 
-app.post('/login', async (req, res) => {
-    try {
-        // Obtén los parámetros de la URL
-        const { usuario, password } = req.body;
+// app.post('/login', async (req, res) => {
+//     try {
+//         // Obtén los parámetros de la URL
+//         const { usuario, password } = req.body;
 
-        // Verifica que todos los parámetros necesarios estén presentes
-        if (!usuario || !password) {
-            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
-        }
-        // Genera un hash (encriptación) de la contraseña
-        const hashedPassword = bcrypt.hash(password, 10);
-        // Realiza la inserción en la base de datos
-        const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, hashedPassword]);
+//         // Verifica que todos los parámetros necesarios estén presentes
+//         if (!usuario || !password) {
+//             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+//         }
+//         // Genera un hash (encriptación) de la contraseña
+//         const hashedPassword = bcrypt.hash(password, 10);
+//         // Realiza la inserción en la base de datos
+//         const [result] = await pool.query('SELECT * FROM Users WHERE name=? AND password=?', [usuario, hashedPassword]);
 
-        if (result.length > 0) {
-            // Devuelve el resultado de la inserción
-            res.json(result);
-        } else {
-            // La consulta no devolvió datos, puedes manejar esto de acuerdo a tus necesidades
-            res.status(500).json({ error: 'Datos erroneos' });
-        }
+//         if (result.length > 0) {
+//             // Devuelve el resultado de la inserción
+//             res.json(result);
+//         } else {
+//             // La consulta no devolvió datos, puedes manejar esto de acuerdo a tus necesidades
+//             res.status(500).json({ error: 'Datos erroneos' });
+//         }
 
-    } catch (error) {
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error interno del servidor' });
+//     }
+// });
 
-app.get('/deseos', async (req, res) => {
+app.get('/lista_regalos', async (req, res) => {
     try {
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('SELECT *.Deseos, name.Users FROM Deseos  INNER JOIN Users ON Deseos.id_user=Users.id ');
+        const [result] = await pool.query('SELECT * FROM regalos');
 
         if (result.length > 0) {
             res.json(result);
@@ -117,18 +115,18 @@ app.get('/deseos', async (req, res) => {
     }
 });
 
-app.get('/crear_deseos', async (req, res) => {
+app.post('/crear_regalo', async (req, res) => {
     try {
         // Obtén los parámetros de la URL
-        const { id_usuario, nombre, link, descripcion } = req.query;
+        const {usuario,producto,descripcion,link,imagen} = req.body;
 
         // Verifica que todos los parámetros necesarios estén presentes
-        if (!id_usuario || !nombre) {
+        if (!usuario || !producto || !imagen) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('INSERT INTO Deseos (nombre, link, descripcion, id_user) VALUES (?, ?, ?,?)', [nombre, link, descripcion, id_usuario]);
+        const [result] = await pool.query('INSERT INTO regalos (usuario, producto, descripcion, link, imagen) VALUES (?,?,?,?,?)', [usuario, producto, descripcion,link,imagen]);
 
         if (result) {
             res.json(result);
@@ -141,30 +139,30 @@ app.get('/crear_deseos', async (req, res) => {
     }
 });
 
-app.get('/eliminar_deseos', async (req, res) => {
-    try {
-        // Obtén los parámetros de la URL
-        const { id } = req.query;
+// app.get('/eliminar_deseos', async (req, res) => {
+//     try {
+//         // Obtén los parámetros de la URL
+//         const { id } = req.query;
 
-        // Verifica que todos los parámetros necesarios estén presentes
-        if (!id) {
-            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
-        }
+//         // Verifica que todos los parámetros necesarios estén presentes
+//         if (!id) {
+//             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+//         }
 
-        // Realiza la inserción en la base de datos
-        const [result] = await pool.query('DELETE FROM Deseos WHERE id=?', [id]);
+//         // Realiza la inserción en la base de datos
+//         const [result] = await pool.query('DELETE FROM Deseos WHERE id=?', [id]);
 
-        if (result.length > 0) {
-            res.json(result);
-        } else {
-            res.status(500).json({ error: 'Error interno del servidor' });
-        }
-        // Devuelve el resultado de la inserción
-    } catch (error) {
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
+//         if (result.length > 0) {
+//             res.json(result);
+//         } else {
+//             res.status(500).json({ error: 'Error interno del servidor' });
+//         }
+//         // Devuelve el resultado de la inserción
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error interno del servidor' });
+//     }
+// });
 
 app.listen(puerto, () => {
-    console.log(`Servidor en: ${puerto}`);
+    console.log(`Servidor iniciado en: ${puerto}`);
 });
