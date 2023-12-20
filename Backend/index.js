@@ -44,15 +44,16 @@ app.post('/registrar_usuarios', async (req, res) => {
     const { usuario, password } = req.query;
 
     try {
-        // Hashear la contraseña con el salt
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Verifica que todos los parámetros necesarios estén presentes
-        if (!usuario || !password) {
+           // Verifica que todos los parámetros necesarios estén presentes
+           if (!usuario || !password) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
+
+        // Hashear la contraseña con el salt
+        const hashedPassword = await bcrypt.hash(String(password), 10);
+
         const [response] = await pool.query('INSERT INTO Users(name, password) VALUES (?, ?)', [usuario, hashedPassword]);
-        
+
         if (response) {
             res.status(200).json({ success: 'Registro exitoso' });
         } else {
