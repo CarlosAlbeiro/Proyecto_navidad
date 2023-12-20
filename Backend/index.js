@@ -68,10 +68,10 @@ app.get('/deseos', async (req, res) => {
         // Realiza la inserción en la base de datos
         const [result] = await pool.query('SELECT *.d, name.u FROM Deseos AS d INNER JOIN Users AS u ON d.id_user =u.id ');
 
-        if(result){
+        if(result.length>0){
             res.json(result);
         }else{
-            res.status(500).json({ error: 'Error interno del servidor' });
+            res.status(500).json({ error: 'Error en la validacion' });
         }
         // Devuelve el resultado de la inserción
     } catch (error) {
@@ -102,8 +102,6 @@ app.get('/crear_deseos', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-
-
 
 app.get('/eliminar_deseos', async (req, res) => {
     try {
