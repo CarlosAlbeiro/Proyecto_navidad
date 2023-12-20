@@ -39,16 +39,16 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.get('/registrar_usuarios', async (req, res) => {
-    // Obtén los parámetros de la URL
-    const { usuario, password } = req.query;
+app.post('/registrar_usuarios', async (req, res) => {
+    // Obtén los parámetros del cuerpo de la solicitud
+    const { usuario, password } = req.body;
 
     try {
         console.log(password);
         console.log("-->"+usuario);
            // Verifica que todos los parámetros necesarios estén presentes
            if (!usuario || !password) {
-            console.error('Error al registrar usuarios:');
+            console.error('Error al registrar usuarios');
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
         }
 
@@ -67,6 +67,7 @@ app.get('/registrar_usuarios', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
 
 app.get('/login', async (req, res) => {
     try {
