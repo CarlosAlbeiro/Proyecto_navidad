@@ -115,10 +115,14 @@ app.get('/lista_regalos', async (req, res) => {
 });
 
 app.post('/crear_regalo', async (req, res) => {
+    const {usuario,producto,descripcion,link,imagen} = req.body;
     try {
         // Obtén los parámetros de la URL
-        const {usuario,producto,descripcion,link,imagen} = req.body;
-
+        console.log("Usuario->",usuario);
+        console.log("producto->",producto);
+        console.log("descripcion->",descripcion);
+        console.log("link->",link);
+        console.log("imagen->",imagen);
         // Verifica que todos los parámetros necesarios estén presentes
         if (!usuario || !producto) {
             return res.status(400).json({ error: 'Faltan parámetros requeridos' });
