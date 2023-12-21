@@ -57,13 +57,13 @@ console.log("Producto form:", producto_form);
       type: "POST",
       url: "https://proyecto-navidad.onrender.com/crear_regalo",
       contentType: "application/json", // Agrega este encabezado
-      data: {
+      data: JSON.stringify({
         usuario: usuario_form,
         producto: producto_form,
         descripcion: descripcion_form,
         link: link_form,
         imagen: imagen_form
-      },
+      }),
       success: function (response) {
         console.log("Deseo ->",response);
         document.getElementById('name_user').innerHTML = usuario_form;
