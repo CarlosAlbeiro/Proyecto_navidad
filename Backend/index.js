@@ -134,7 +134,7 @@ app.post('/crear_regalo', async (req, res) => {
         }
         // Devuelve el resultado de la inserción
     } catch (error) {
-        res.status(500).json({ error: 'Error interno del servidor' });
+        res.status(500).json({ error: 'Error interno del servidor'+error});
     }
 });
 
