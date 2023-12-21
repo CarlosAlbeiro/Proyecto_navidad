@@ -76,7 +76,9 @@ body, h1, h2, p, ul {
   body.dark-mode footer {
     background-color: #333;
   }
-  
-
- 
-  
+  .regalo{
+    background: url(img/regalo.png);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+  }
