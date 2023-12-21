@@ -63,7 +63,7 @@ function desear() {
         imagen: imagen_form
       },
       success: function (response) {
-        console.log("Deseo ->".response);
+        console.log("Deseo ->",response);
         document.getElementById('name_user').innerHTML = usuario_form;
 
         const toastLiveExample = document.getElementById('liveToast')
@@ -71,8 +71,8 @@ function desear() {
         toastBootstrap.show()
       },
       error: function (error) {
-        let errorCode = JSON.parse(error);
-        console.error(errorCode);
+        // let errorCode = JSON.parse(error);
+        console.error(error);
         document.getElementById('mensaje_error').innerHTML = "Error al registrar tu regalo.";
 
         const toastLiveExample = document.getElementById('error')
