@@ -1,7 +1,8 @@
 /* Reset de estilos para limpiar márgenes y rellenos predeterminados */
-body, h1, h2, p, ul {
+body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
   }
   
   body {
@@ -77,8 +78,9 @@ body, h1, h2, p, ul {
     background-color: #333;
   }
   .regalo{
-    background: url(img/regalo.png);
-    background-size: cover;
-    width: 100px;
-    height: 100px;
+    border-radius: 20px;
+    border: green 3px solid;
+  }
+  .mo{
+    background: red;  
   }
