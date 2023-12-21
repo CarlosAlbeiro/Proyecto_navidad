@@ -45,7 +45,8 @@ function desear() {
   let descripcion_form = document.getElementById('descripcion').value;
   let link_form = document.getElementById('link').value;
   let imagen_form = document.getElementById('imagen').value;
-
+  console.log("Usuario form:", usuario_form);
+console.log("Producto form:", producto_form);
   if (!usuario_form || !producto_form || !descripcion_form) {
     const toastLiveExample = document.getElementById('error')
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -55,6 +56,7 @@ function desear() {
     $.ajax({
       type: "POST",
       url: "https://proyecto-navidad.onrender.com/crear_regalo",
+      contentType: "application/json", // Agrega este encabezado
       data: {
         usuario: usuario_form,
         producto: producto_form,
