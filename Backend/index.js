@@ -125,7 +125,7 @@ app.post('/crear_regalo', async (req, res) => {
         }
 
         // Realiza la inserción en la base de datos
-        const [result] = await pool.query('INSERT INTO regalos(usuario, producto, descripcion, link, imagen) VALUES (?,?,?,?,?)', [usuario, producto, descripcion, link, imagen]);
+        const [result] = await pool.query('INSERT INTO regalos(usuarios, producto, descripcion, link, imagen) VALUES (?,?,?,?,?)', [usuario, producto, descripcion, link, imagen]);
 
         if (result) {
             res.json(result);
