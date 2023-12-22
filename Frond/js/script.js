@@ -102,7 +102,7 @@ function desear() {
 function eliminar(id) {
   $.ajax({
     type: "POST",
-    url: "https://proyecto-navidad.onrender.com/crear_regalo",
+    url: "https://proyecto-navidad.onrender.com/eliminar_regalo",
     contentType: "application/json", // Agrega este encabezado
     data: JSON.stringify({
       id: id
