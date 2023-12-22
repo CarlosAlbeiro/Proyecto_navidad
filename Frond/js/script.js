@@ -13,7 +13,7 @@ function consulta_deseos() {
           color="pink"
         }
         $("#list_deseos").append(`
-        <div class="col-md-3 col-sm-6 col-4 d-flex justify-content-center dropdown-center ">
+        <div class="col-md-4 col-sm-6 col-4 d-flex justify-content-center dropdown-center ">
           <div class="mo">
           </div>
           <div class="badge ml-1 dropdown-toggle regalo" data-bs-toggle="dropdown" style="background:${color};">
@@ -80,6 +80,11 @@ function desear() {
         const toastLiveExample = document.getElementById('liveToast')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()
+        document.getElementById('usuario').innerHTML ="";
+        document.getElementById('producto').innerHTML ="";
+        document.getElementById('descripcion').innerHTML ="";
+        document.getElementById('link').innerHTML ="";
+        document.getElementById('imagen').innerHTML ="";
         consulta_deseos()
       },
       error: function (error) {
