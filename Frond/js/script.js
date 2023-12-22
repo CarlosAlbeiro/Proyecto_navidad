@@ -113,7 +113,7 @@ function desear() {
       }),
       success: function (response) {
         console.log("Deseo ->",response);
-        document.getElementById('name_user').innerHTML = usuario_form;
+       // document.getElementById('name_user').innerHTML = usuario_form;
         document.getElementById('msj_exito').innerHTML = "Registro exitoso";
         const toastLiveExample = document.getElementById('exito')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
