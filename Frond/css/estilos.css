@@ -13,15 +13,10 @@ body {
     
   }
 
-  section{
+  main{
     height: 100vh;
   }
-  
-  main {
-    max-width: 800px;
-    margin: 20px auto;
-  }
-  
+
   .regalo{
     border-radius: 20px;
     border: green 3px solid;
