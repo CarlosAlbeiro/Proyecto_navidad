@@ -114,6 +114,30 @@ app.get('/lista_regalos', async (req, res) => {
     }
 });
 
+app.post('/eliminar_regalo', async (req, res) => {
+    const {id} = req.body;
+    try {
+        // Obtén los parámetros de la URL
+        console.log("Id->",id);
+      
+        // Verifica que todos los parámetros necesarios estén presentes
+        if (!id) {
+            return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        }
+
+        // Realiza la inserción en la base de datos
+        const [result] = await pool.query('DELETE FROM regalos WHERE id=?', [id]);
+
+        if (result) {
+            res.json(result);
+        } else {
+            res.status(500).json({ error: 'Error al validar' });
+        }
+        // Devuelve el resultado de la inserción
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor-> '+error});
+    }
+});
 app.post('/crear_regalo', async (req, res) => {
     const {usuario,producto,descripcion,link,imagen} = req.body;
     try {

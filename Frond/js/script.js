@@ -13,12 +13,11 @@ function consulta_deseos() {
           color="pink"
         }
         $("#list_deseos").append(`
-        <div class="col-md-4 col-sm-6 col-4 d-flex justify-content-center dropdown-center ">
-          <div class="mo">
-          </div>
+        <div id="regalo${deseos.id}" class="mt-2 col-lg-4 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center dropdown-center ">
+          
           <div class="badge ml-1 dropdown-toggle regalo" data-bs-toggle="dropdown" style="background:${color};">
           <div class="badge rounded-pill bg-light text-dark mb-1">
-            <span>${deseos.usuarios}</span>
+            <span>${deseos.usuarios}  <i onclick="eliminar('${deseos.id}')" class="far fa-trash-alt"></i></span>
           </div>
           <br>
             <div class="badge rounded-pill bg-light text-dark">
@@ -76,8 +75,8 @@ function desear() {
       success: function (response) {
         console.log("Deseo ->",response);
         document.getElementById('name_user').innerHTML = usuario_form;
-
-        const toastLiveExample = document.getElementById('liveToast')
+        document.getElementById('msj_exito').innerHTML = "Registro exitoso";
+        const toastLiveExample = document.getElementById('exito')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()
         document.getElementById('usuario').innerHTML ="";
@@ -90,7 +89,7 @@ function desear() {
       error: function (error) {
         // let errorCode = JSON.parse(error);
         console.error(error);
-        document.getElementById('mensaje_error').innerHTML = "Error al registrar tu regalo.";
+        document.getElementById('msj_error').innerHTML = "Error al registrar tu regalo.";
 
         const toastLiveExample = document.getElementById('error')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -98,8 +97,37 @@ function desear() {
       }
     });
   }
+}
 
+function eliminar(id) {
+  $.ajax({
+    type: "POST",
+    url: "https://proyecto-navidad.onrender.com/crear_regalo",
+    contentType: "application/json", // Agrega este encabezado
+    data: JSON.stringify({
+      id: id
+    }),
+    success: function (response) {
+      const toastLiveExample = document.getElementById('exito')
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      toastBootstrap.show()
+      document.getElementById('usuario').innerHTML ="";
+      document.getElementById('producto').innerHTML ="";
+      document.getElementById('descripcion').innerHTML ="";
+      document.getElementById('link').innerHTML ="";
+      document.getElementById('imagen').innerHTML ="";
+      consulta_deseos()
+    },
+    error: function (error) {
+      // let errorCode = JSON.parse(error);
+      console.error(error);
+      document.getElementById('msj_error').innerHTML = "Error al eliminar tu regalo.";
 
+      const toastLiveExample = document.getElementById('error')
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      toastBootstrap.show()
+    }
+  });
 
 }
 

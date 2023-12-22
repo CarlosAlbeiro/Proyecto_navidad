@@ -26,7 +26,7 @@
     <main class="animate__animated animate__fadeIn animate__delay-1s">
       <section>
         <div class="row">
-          <div class="col-4 card">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 card">
             <div class="card-header d-flex justify-content-center align-items-center">
               <h4>Agregar Regalo</h4>
             </div>
@@ -57,7 +57,7 @@
   
             </div>
           </div>
-          <div class="col-8 card ml-3">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 card ml-3">
             <div class="card-header d-flex justify-content-center align-items-center">
               <h4>Lista de deseos</h4>
             </div>
@@ -76,11 +76,10 @@
       </section>
     </main>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div id="exito" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
           <img src="css/img/exito.png" class="rounded me-2" width="25">
-          <strong class="me-auto">Registro exitoso</strong>
-          <small id="name_user">11 mins ago</small>
+          <strong class="msj-exito"></strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
@@ -89,7 +88,7 @@
       <div id="error" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
           <img src="css/img/advertencia.png" class="rounded me-2" width="25">
-          <strong class="me-auto" id="mensaje_error">Por favor completa los datos</strong>
+          <strong class="me-auto" id="msj_error">Por favor completa los datos</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
