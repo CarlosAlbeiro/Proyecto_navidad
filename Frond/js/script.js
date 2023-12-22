@@ -81,6 +81,7 @@ function desear() {
         const toastLiveExample = document.getElementById('liveToast')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()
+        consulta_deseos()
       },
       error: function (error) {
         // let errorCode = JSON.parse(error);
