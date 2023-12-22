@@ -111,12 +111,7 @@ function eliminar(id) {
       const toastLiveExample = document.getElementById('exito')
       const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
       toastBootstrap.show()
-      document.getElementById('usuario').innerHTML ="";
-      document.getElementById('producto').innerHTML ="";
-      document.getElementById('descripcion').innerHTML ="";
-      document.getElementById('link').innerHTML ="";
-      document.getElementById('imagen').innerHTML ="";
-      consulta_deseos()
+      document.getElementById(`regalo${id}`).remove();
     },
     error: function (error) {
       // let errorCode = JSON.parse(error);
