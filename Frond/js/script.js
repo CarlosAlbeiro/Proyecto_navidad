@@ -1,3 +1,42 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const destellosContainer = document.getElementById('destellos');
+
+  document.addEventListener('mousemove', function(event) {
+      crearDestello(event.pageX, event.pageY);
+  });
+
+  function crearDestello(x, y) {
+      const destello = document.createElement('div');
+      destello.classList.add('destello');
+      destello.style.width = destello.style.height = Math.random() * 30 + 'px';
+      destello.style.top = y - destello.clientHeight / 2 + 'px';
+      destello.style.left = x - destello.clientWidth / 2 + 'px';
+      destellosContainer.appendChild(destello);
+
+      // Elimina el destello después de la animación
+      setTimeout(function() {
+        destellosContainer.removeChild(destello);
+    }, 1500);
+  }
+});
+
+function crearEstrella() {
+  const estrella = document.createElement('div');
+  estrella.className = 'estrella';
+  estrella.style.left = `${Math.random() * window.innerWidth}px`;
+  estrella.style.top = `${Math.random() * window.innerHeight}px`;
+  document.body.appendChild(estrella);
+  console.log("Estrella creada");
+
+  // setTimeout(() => {
+  //     estrella.remove();
+  // }, 2000); // Eliminar la estrella después de 2 segundos
+}
+
+setInterval(() => {
+  crearEstrella();
+}, 500); // Crear una nueva estrella cada 3 segundos
+
 function consulta_deseos() {
   $.ajax({
     type: "GET",
@@ -8,7 +47,7 @@ function consulta_deseos() {
       console.log(data);
       data.forEach(deseos => {
         let link=!deseos.link? "sin":deseos.link;
-        let color="blue";
+        let color="#1C588C";
         if(deseos.usuarios=="LAURA"){
           color="pink"
         }
