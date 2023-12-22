@@ -8,12 +8,15 @@ function consulta_deseos() {
       console.log(data);
       data.forEach(deseos => {
         let link=!deseos.link? "sin":deseos.link;
-
+        let color="blue";
+        if(deseos.usuarios=="LAURA"){
+          color="pink"
+        }
         $("#list_deseos").append(`
         <div class="col-md-3 col-sm-6 col-4 d-flex justify-content-center dropdown-center ">
           <div class="mo">
           </div>
-          <div class="badge bg-primary ml-1 dropdown-toggle regalo" data-bs-toggle="dropdown">
+          <div class="badge ml-1 dropdown-toggle regalo" data-bs-toggle="dropdown" style="background:${color};">
           <div class="badge rounded-pill bg-light text-dark mb-1">
             <span>${deseos.usuarios}</span>
           </div>
@@ -29,11 +32,7 @@ function consulta_deseos() {
           ${deseos.descripcion}
           <a href="${link}" target="_blank">${link=="sin"?"":"link"}</a>
           </div>
-         
         </div>
-       
-  
-
         `);
       });
       // Crear un nuevo elemento div
