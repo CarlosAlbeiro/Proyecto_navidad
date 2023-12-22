@@ -114,15 +114,15 @@ function desear() {
       success: function (response) {
         console.log("Deseo ->",response);
        // document.getElementById('name_user').innerHTML = usuario_form;
-        document.getElementById('msj_exito').innerHTML = "Registro exitoso";
+        document.getElementById('msj-exito').innerHTML = "Registro exitoso";
         const toastLiveExample = document.getElementById('exito')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()
-        document.getElementById('usuario').innerHTML ="";
-        document.getElementById('producto').innerHTML ="";
-        document.getElementById('descripcion').innerHTML ="";
-        document.getElementById('link').innerHTML ="";
-        document.getElementById('imagen').innerHTML ="";
+        document.getElementById('usuario').value ="";
+        document.getElementById('producto').value ="";
+        document.getElementById('descripcion').value ="";
+        document.getElementById('link').value ="";
+        document.getElementById('imagen').value ="";
         consulta_deseos()
       },
       error: function (error) {
@@ -147,6 +147,7 @@ function eliminar(id) {
       id: id
     }),
     success: function (response) {
+      document.getElementById('msj-exito').innerHTML = "Regalo eliminado corectamente.";
       const toastLiveExample = document.getElementById('exito')
       const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
       toastBootstrap.show()

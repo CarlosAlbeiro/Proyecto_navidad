@@ -61,7 +61,7 @@
             <div class="card-header d-flex justify-content-center align-items-center">
               <h4>Lista de deseos</h4>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center" style="overflow-y: auto; max-height: 34em;">
               <div class="row col-12 justify-content-evenly" id="list_deseos">
                 <div class="col-12 d-flex justify-content-center">
                   <img src="css/img/cargando_2.gif" width="200" alt="">
@@ -79,7 +79,7 @@
       <div id="exito" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
           <img src="css/img/exito.png" class="rounded me-2" width="25">
-          <strong class="msj-exito"></strong>
+          <strong id="msj-exito"></strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
@@ -88,7 +88,7 @@
       <div id="error" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
           <img src="css/img/advertencia.png" class="rounded me-2" width="25">
-          <strong class="me-auto" id="msj_error">Por favor completa los datos</strong>
+          <strong id="msj_error">Por favor completa los datos</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
